@@ -96,13 +96,29 @@ footer {
 </head>
 <body>
 
-<header>
-  <h1>Artisan.ai</h1>
-  <p>Le copilote intelligent qui simplifie la vie des artisans.</p>
-  <div class="cta">
-    <a href="mailto:contact@artisan.ai.fr">Demander un accès</a>
-  </div>
-</header>
+header {
+  background: url("https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80")
+    center/cover no-repeat;
+  color: white;
+  padding: 120px 20px;
+  text-align: center;
+  position: relative;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+header h1,
+header p,
+.cta {
+  position: relative;
+  z-index: 2;
+}
+
 
 <section>
   <h2>Pourquoi Artisan.ai ?</h2>
