@@ -81,6 +81,25 @@ h2 {
   color: #1a1a1a;
 }
 
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cartes côte à côte */
+  gap: 25px;
+  margin-top: 30px;
+}
+@media (max-width: 800px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr); /* 2 cartes côte à côte */
+  }
+}
+
+@media (max-width: 500px) {
+  .features {
+    grid-template-columns: 1fr; /* 1 carte par ligne */
+  }
+}
+    
+
 .feature {
   background: white;
   padding: 25px;
