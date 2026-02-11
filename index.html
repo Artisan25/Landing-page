@@ -1,243 +1,222 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artisan.ai – Le copilote des artisans</title>
-  <style>
-    body {
-  margin: 0;
-  font-family: "Inter", Arial, sans-serif;
-  background: #f5f5f5;
-  color: #333;
-  line-height: 1.6;
-}
-
-header {
-  background: url("https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80")
-    center/cover no-repeat;
-  color: white;
-  padding: 120px 20px;
-  text-align: center;
-  position: relative;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-}
-
-header h1,
-header p,
-.cta {
-  position: relative;
-  z-index: 2;
-}
-
-
-header h1 {
-  margin: 0;
-  font-size: 3rem;
-  font-weight: 700;
-}
-
-header p {
-  margin-top: 15px;
-  font-size: 1.3rem;
-  opacity: 0.9;
-}
-
-.cta {
-  margin-top: 30px;
-}
-
-.cta a {
-  background: #ffb400;
-  color: #1a1a1a;
-  padding: 16px 32px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: background 0.2s ease;
-}
-
-.cta a:hover {
-  background: #e0a000;
-}
-
-section {
-  max-width: 1000px;
-  margin: 60px auto;
-  padding: 0 20px;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cartes côte à côte */
-  gap: 25px;
-  margin-top: 30px;
-}
-@media (max-width: 800px) {
-  .features {
-    grid-template-columns: repeat(2, 1fr); /* 2 cartes côte à côte */
-  }
-}
-
-@media (max-width: 500px) {
-  .features {
-    grid-template-columns: 1fr; /* 1 carte par ligne */
-  }
-}
-    
-
-.feature {
-  background: white;
-  padding: 25px;
-  border-radius: 4px; /* cartes parfaitement carrées */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-
-  opacity: 0;
-  transform: translateY(20px);
-
-  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.2s ease;
-}
-
-.feature.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.feature:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
-
-footer {
-  text-align: center;
-  padding: 40px;
-  margin-top: 60px;
-  background: #1a1a1a;
-  color: white;
-  font-size: 0.95rem;
-}
-
-  
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>Artisan.ai</h1>
-  <p>Le copilote intelligent qui simplifie la vie des artisans.</p>
-  <div class="cta">
-    <a href="mailto:contact@artisan.ai.fr">Demander un accès</a>
-  </div>
-</header>
-
-<section>
-  <h2>Pourquoi artisan.ai ?</h2>
-  <div class="features">
-    <div class="feature">
-      <h3>Automatisation intelligente</h3>
-      <p>Gagnez du temps en automatisant vos tâches répétitives : devis, relances, gestion de planning.</p>
-    </div>
-    <div class="feature">
-      <h3>Image professionnelle</h3>
-      <p>Valorisez votre savoir-faire avec une présence en ligne moderne, claire et personnalisée.</p>
-    </div>
-    <div class="feature">
-      <h3>Pensé pour les artisans</h3>
-      <p>Pas de jargon technique : une interface simple, des outils concrets, et un accompagnement humain.</p>
-    </div>
-  </div>
-</section>
-
-
-<section>
-  <h2>Ce que vous gagnez</h2>
-  <div class="features">
-    <div class="feature">
-      <h3>⏱️ Moins d’administratif</h3>
-      <p>Devis, factures, relances, organisation… tout est simplifié et automatisé.</p>
-    </div>
-    <div class="feature">
-      <h3>📞 Plus de clients</h3>
-      <p>Réponses automatiques, prise de rendez‑vous, messages professionnels instantanés.</p>
-    </div>
-    <div class="feature">
-      <h3>📚 Zéro stress</h3>
-      <p>Un assistant intelligent qui vous aide au quotidien, sans effort.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Ils en parlent mieux que nous</h2>
-  <div class="features">
-    <div class="feature">
-      <p>“artisan.ai m’a permis de gagner 2h par jour. Je peux enfin me concentrer sur mon métier.”</p>
-      <strong>— Julie, ébéniste à Lyon</strong>
-    </div>
-    <div class="feature">
-      <p>“J’ai reçu mes premiers clients via mon nouveau site en moins d’une semaine.”</p>
-      <strong>— Karim, carreleur à Genève</strong>
-    </div>
-    <div class="feature">
-      <p>“Simple, rapide, efficace. artisan.ai est devenu mon assistant invisible.”</p>
-      <strong>— Sophie, couturière à Nantes</strong>
-    </div>
-  </div>
-</section>
-
-
-<section>
-  <h2>Pour qui ?</h2>
-  <p>
-    Plombiers, électriciens, menuisiers, peintres, carreleurs, mécaniciens, 
-    serruriers, chauffagistes, couvreurs, maçons, paysagistes…  
-    Artisan.ai s’adapte à tous les métiers.
-  </p>
-</section>
-
-<section>
-  <h2>Prêt à simplifier votre quotidien ?</h2>
-  <p>
-    Artisan.ai est actuellement en phase de pré‑lancement.  
-    Les premiers inscrits bénéficieront d’un accès prioritaire et d’un accompagnement personnalisé.
-  </p>
-  <div class="cta">
-    <a href="mailto:contact@artisan.ai.fr">Rejoindre la liste d’attente</a>
-  </div>
-</section>
-
-<footer>
-  © 2026 Artisan.ai – Tous droits réservés
-</footer>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
+  <head>
+    <meta charset="UTF-8" />
+    <title>artisan.ai</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Inter", Arial, sans-serif;
+        background: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
       }
-    });
-  });
 
-  document.querySelectorAll(".feature").forEach((el) => observer.observe(el));
-</script>
+      header {
+        background: url("https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80")
+          center/cover no-repeat;
+        color: white;
+        padding: 120px 20px;
+        text-align: center;
+        position: relative;
+      }
 
-  
-</body>
+      header::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+      }
+
+      header h1,
+      header p,
+      .cta {
+        position: relative;
+        z-index: 2;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 3rem;
+        font-weight: 700;
+      }
+
+      header p {
+        margin-top: 15px;
+        font-size: 1.3rem;
+        opacity: 0.9;
+      }
+
+      .cta {
+        margin-top: 30px;
+      }
+
+      .cta a {
+        background: #ffb400;
+        color: #1a1a1a;
+        padding: 16px 32px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: background 0.2s ease;
+      }
+
+      .cta a:hover {
+        background: #e0a000;
+      }
+
+      section {
+        max-width: 1000px;
+        margin: 60px auto;
+        padding: 0 20px;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      /* --- CARTES EN LIGNE HORIZONTALE --- */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 cartes côte à côte */
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      @media (max-width: 800px) {
+        .features {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 500px) {
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* --- STYLE DES CARTES + ANIMATION SCROLL --- */
+      .feature {
+        background: white;
+        padding: 25px;
+        border-radius: 0; /* cartes carrées */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+        opacity: 0;
+        transform: translateY(20px);
+
+        transition: opacity 0.6s ease, transform 0.6s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .feature.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .feature:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px;
+        margin-top: 60px;
+        background: #1a1a1a;
+        color: white;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>artisan.ai</h1>
+      <p>Le copilote numérique des artisans modernes.</p>
+      <div class="cta">
+        <a href="#contact">Rejoindre la liste d’attente</a>
+      </div>
+    </header>
+
+    <!-- SECTION POURQUOI -->
+    <section>
+      <h2>Pourquoi artisan.ai ?</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>Automatisation intelligente</h3>
+          <p>
+            Gagnez du temps en automatisant vos tâches répétitives : devis,
+            relances, gestion de planning.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Image professionnelle</h3>
+          <p>
+            Valorisez votre savoir-faire avec une présence en ligne moderne,
+            claire et personnalisée.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Pensé pour les artisans</h3>
+          <p>
+            Pas de jargon technique : une interface simple, des outils concrets,
+            et un accompagnement humain.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION TEMOIGNAGES -->
+    <section>
+      <h2>Ils en parlent mieux que nous</h2>
+      <div class="features">
+        <div class="feature">
+          <p>
+            “artisan.ai m’a permis de gagner 2h par jour. Je peux enfin me
+            concentrer sur mon métier.”
+          </p>
+          <strong>— Julie, ébéniste à Lyon</strong>
+        </div>
+        <div class="feature">
+          <p>
+            “J’ai reçu mes premiers clients via mon nouveau site en moins d’une
+            semaine.”
+          </p>
+          <strong>— Karim, carreleur à Genève</strong>
+        </div>
+        <div class="feature">
+          <p>
+            “Simple, rapide, efficace. artisan.ai est devenu mon assistant
+            invisible.”
+          </p>
+          <strong>— Sophie, couturière à Nantes</strong>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      artisan.ai — Construire le numérique au service du savoir-faire.
+    </footer>
+
+    <!-- SCRIPT ANIMATION SCROLL -->
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      });
+
+      document
+        .querySelectorAll(".feature")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
-
