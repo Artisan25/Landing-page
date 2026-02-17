@@ -338,10 +338,16 @@ html { scroll-behavior: smooth; }
   <h2>Rejoindre la liste d’attente</h2>
   <p>Laissez votre email pour être informé du lancement.</p>
 
-  <form class="signup-form">
-    <input type="email" placeholder="Votre email" required />
-    <button type="submit">S’inscrire</button>
-  </form>
+  <!-- <form class="signup-form"> -->
+  <!-- <input type="email" placeholder="Votre email" required /> -->
+  <!--  <button type="submit">S’inscrire</button> -->
+  <!-- </form> -->
+
+  <form action="https://formspree.io/f/xxxxabcd" method="POST">
+  <input type="email" name="email" placeholder="Votre email" required>
+  <button type="submit">Rejoindre la liste d’attente</button>
+</form>
+
 </section>
 
 
