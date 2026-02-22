@@ -519,21 +519,26 @@ html { scroll-behavior: smooth; }
 <!-- Script de redirection -->
 
 <script>
-document.getElementById("waitlist-form").addEventListener("submit", async function(event) {
+document.getElementById("waitlist-form").addEventListener("submit", function(event) {
   event.preventDefault();
 
   const email = document.querySelector("input[type='email']").value;
   const metier = document.querySelector("input[type='text']").value;
 
-  await fetch("https://script.google.com/macros/s/AKfycbyx1Okenrt4eH3TVMIC7w5QyipMQwFHKYRwPGh3ESP2UqKOLyXGBd-AMU6KZ9I9F616/exec", {
+  // Envoi vers Google Sheets (sans bloquer la redirection)
+  fetch("https://script.google.com/macros/s/AKfycbyx1Okenrt4eH3TVMIC7w5QyipMQwFHKYRwPGh3ESP2UqKOLyXGBd-AMU6KZ9I9F616/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: email, metier: metier })
+  }).catch(function(error) {
+    console.error("Erreur lors de l'envoi vers Google Sheets :", error);
   });
 
+  // Redirection immédiate vers la page de remerciement
   window.location.href = "merci.html";
 });
 </script>
+
 
 <!-- Ancien Script -->
 
