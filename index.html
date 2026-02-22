@@ -519,19 +519,38 @@ html { scroll-behavior: smooth; }
 <!-- Script de redirection -->
 
 <script>
-document.getElementById("waitlist-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const form = e.target;
+document.getElementById("waitlist-form").addEventListener("submit", async function(event) {
+  event.preventDefault();
 
-  fetch(form.action, {
+  const email = document.querySelector("input[type='email']").value;
+  const metier = document.querySelector("input[type='text']").value;
+
+  await fetch("https://script.google.com/macros/s/AKfycbyx1Okenrt4eH3TVMIC7w5QyipMQwFHKYRwPGh3ESP2UqKOLyXGBd-AMU6KZ9I9F616/exec", {
     method: "POST",
-    body: new FormData(form),
-    headers: { "Accept": "application/json" }
-  }).then(() => {
-    window.location.href = "merci.html";
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: email, metier: metier })
   });
+
+  window.location.href = "merci.html";
 });
 </script>
+
+<!-- Ancien Script -->
+
+<!-- <script> -->
+<!-- document.getElementById("waitlist-form").addEventListener("submit", function(e) { -->
+<!--  e.preventDefault(); -->
+<!--  const form = e.target; -->
+
+<!--  fetch(form.action, { -->
+<!--    method: "POST", -->
+<!--    body: new FormData(form), -->
+<!--    headers: { "Accept": "application/json" } -->
+<!--  }).then(() => { -->
+<!--    window.location.href = "merci.html"; -->
+<!--  }); -->
+<!-- }); -->
+<!-- </script> -->
 
 
 </section>
