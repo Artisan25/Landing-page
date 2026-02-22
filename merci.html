@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merci pour votre inscription – Artisan.ai</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #222;
+    }
+
+    .card {
+      background: white;
+      padding: 50px 40px;
+      border-radius: 16px;
+      max-width: 520px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      background: #e8f7ec;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 25px auto;
+    }
+
+    .icon span {
+      font-size: 48px;
+      color: #2ecc71;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 1.15rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #000;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background: #333;
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    footer a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <div class="icon">
+      <span>✔</span>
+    </div>
+
+    <h1>Merci pour votre inscription !</h1>
+
+    <p>
+      Votre demande a bien été enregistrée.<br>
+      Vous recevrez bientôt un email avec les prochaines étapes pour accéder à la version bêta d’Artisan.ai.
+    </p>
+
+    <a href="index.html" class="button">Retour à l’accueil</a>
+
+    <footer>
+      Besoin d’aide ?  
+      <a href="mailto:contact@artisan-ai.fr">contact@artisan-ai.fr</a>
+    </footer>
+  </div>
+
+</body>
+</html>
