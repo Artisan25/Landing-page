@@ -525,7 +525,7 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
   const email = document.querySelector("input[type='email']").value;
   const metier = document.querySelector("input[type='text']").value;
 
-  // Envoi vers Google Sheets (sans bloquer la redirection)
+  // Envoi vers Google Sheets
   fetch("https://script.google.com/macros/s/AKfycbyx1Okenrt4eH3TVMIC7w5QyipMQwFHKYRwPGh3ESP2UqKOLyXGBd-AMU6KZ9I9F616/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -534,10 +534,11 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
     console.error("Erreur lors de l'envoi vers Google Sheets :", error);
   });
 
-  // Redirection immédiate vers la page de remerciement
+  // Redirection immédiate
   window.location.href = "merci.html";
 });
 </script>
+
 
 
 <!-- Ancien Script -->
