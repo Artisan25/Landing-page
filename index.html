@@ -526,7 +526,7 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
   const metier = document.querySelector("input[type='text']").value;
 
   // Envoi vers Google Sheets
-  fetch("https://script.google.com/macros/s/AKfycbz_YuYOyHC1JlHIk6Okh9ngWjI4Kb_qYrd3oL_c2Ij53Rem5-eCPBWayC93YvIihwxY/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzoP3O50QihTh1ne1RqflkDhrBHKwsHIkO2HbE9L-OBBuq8D_4nFJiFT5JDF0-Miexh/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: email, metier: metier })
