@@ -501,7 +501,7 @@ html { scroll-behavior: smooth; }
 
   <!-- Formulaire d'inscription avec redirection vers page remerciement -->
   
-  <form id="waitlist-form">
+ <!-- <form id="waitlist-form">
 
   <div class="form-group">
     <label for="email">Votre email</label>
@@ -518,7 +518,7 @@ html { scroll-behavior: smooth; }
 
 <!-- Script de redirection -->
 
-<script>
+<!-- <script>
 document.getElementById("waitlist-form").addEventListener("submit", function(event) {
   event.preventDefault();
 
@@ -536,8 +536,45 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
 
   // Redirection immédiate
   window.location.href = "merci.html";
-});
+<!-- }); -->
+<! --</script> -->
+
+<!-- Nouveau Formulaire -->
+
+<form id="newsletter-form">
+  <input type="email" id="email" placeholder="Votre email" required />
+  <input type="text" id="company" placeholder="Nom de l'entreprise" required />
+  <button type="submit">S'inscrire</button>
+</form>
+
+<p id="message"></p>
+
+<script>
+  document.getElementById("newsletter-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const company = document.getElementById("company").value;
+
+    const res = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, company }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      document.getElementById("message").textContent = "Merci ! Vous êtes inscrit.";
+    } else {
+      document.getElementById("message").textContent = "Erreur : " + data.error;
+    }
+
+    // Redirection immédiate
+  window.location.href = "merci.html";
+  });
 </script>
+
 
 
 
