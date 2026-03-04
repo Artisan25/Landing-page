@@ -537,13 +537,25 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
   // Redirection immédiate
   window.location.href = "merci.html";
 <!-- }); -->
-<! --</script> -->
+<!-- <! --</script> -->
 
-<!-- Nouveau Formulaire -->
+<!-- ***** Nouveau Formulaire **** -->
 
 <form id="newsletter-form">
-  <input type="email" id="email" placeholder="Votre email" required />
-  <input type="text" id="company" placeholder="Nom de l'entreprise" required />
+  <input 
+    type="email" 
+    id="email" 
+    placeholder="Votre email" 
+    required 
+  />
+
+  <input 
+    type="text" 
+    id="company" 
+    placeholder="Nom de l'entreprise" 
+    required 
+  />
+
   <button type="submit">S'inscrire</button>
 </form>
 
@@ -556,6 +568,7 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
     const email = document.getElementById("email").value;
     const company = document.getElementById("company").value;
 
+    // Appel à ton API route
     const res = await fetch("/api/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -565,14 +578,18 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
     const data = await res.json();
 
     if (data.success) {
-      document.getElementById("message").textContent = "Merci ! Vous êtes inscrit.";
+      // Message optionnel
+      document.getElementById("message").textContent = "Merci ! Redirection...";
+
+      // Redirection vers la page de remerciement
+      window.location.href = "merci.html"; 
+      // ⚠️ Mets ici l’URL exacte de ta page de remerciement
     } else {
       document.getElementById("message").textContent = "Erreur : " + data.error;
     }
-
-    
   });
 </script>
+
 
 
 
