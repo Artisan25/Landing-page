@@ -556,7 +556,7 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
     required 
   />
 
-  <button type="submit">S'inscrire</button>
+  <button type="submit" id="submit-btn">S'inscrire</button>
 </form>
 
 <p id="message"></p>
@@ -567,28 +567,38 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
 
     const email = document.getElementById("email").value;
     const company = document.getElementById("company").value;
+    const message = document.getElementById("message");
+    const button = document.getElementById("submit-btn");
 
-    // Appel à ton API route
-    const res = await fetch("/api/subscribe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, company }),
-    });
+    // Désactive le bouton pour éviter les doubles clics
+    button.disabled = true;
+    message.textContent = "Envoi en cours...";
 
-    const data = await res.json();
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, company }),
+      });
 
-    if (data.success) {
-      // Message optionnel
-      document.getElementById("message").textContent = "Merci ! Redirection...";
+      const data = await res.json();
 
-      // Redirection vers la page de remerciement
-      window.location.href = "merci.html"; 
-      // ⚠️ Mets ici l’URL exacte de ta page de remerciement
-    } else {
-      document.getElementById("message").textContent = "Erreur : " + data.error;
+      if (data.success) {
+        message.textContent = "Merci ! Redirection...";
+        window.location.href = "merci.html";
+      } else {
+        message.textContent = "Erreur : " + data.error;
+      }
+
+    } catch (err) {
+      message.textContent = "Erreur réseau. Réessayez dans un instant.";
     }
+
+    // Réactive le bouton
+    button.disabled = false;
   });
 </script>
+
 
 
 
