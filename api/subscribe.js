@@ -10,47 +10,42 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Email manquant" });
     }
 
-    // 1️⃣ Création du contact
+    // 1️⃣ Création du contact (ta version qui fonctionne)
     const createContact = await fetch("https://api.systeme.io/api/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-API-Key": process.env.SYSTEME_IO_API_KEY,
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({
+        email,
+        tags: [1909605], // ton tag fonctionne déjà
+      }),
     });
 
     const created = await createContact.json();
 
     if (!createContact.ok) {
-      return res.status(500).json({ error: created });
+      return res.status(500).json({
+        error: created.message || "Erreur lors de la création du contact",
+      });
     }
 
-    const contactId = created.id; // ID du contact créé
+    const contactId = created.id;
 
-    // 2️⃣ Ajout du tag
-    await fetch(`https://api.systeme.io/api/contacts/${contactId}/tags`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-      },
-      body: JSON.stringify({
-        tag_id: 1909605, // ID du tag landing-artisan
-      }),
-    });
-
-    // 3️⃣ Ajout de l’attribut "company"
-    await fetch(`https://api.systeme.io/api/contacts/${contactId}/attributes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-      },
-      body: JSON.stringify({
-        company: company,
-      }),
-    });
+    // 2️⃣ Ajout d’une note visible dans la fiche contact
+    if (company && company.trim() !== "") {
+      await fetch(`https://api.systeme.io/api/contacts/${contactId}/notes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": process.env.SYSTEME_IO_API_KEY,
+        },
+        body: JSON.stringify({
+          content: `Entreprise : ${company}`,
+        }),
+      });
+    }
 
     return res.status(200).json({ success: true });
 
