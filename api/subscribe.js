@@ -10,25 +10,36 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Email manquant" });
     }
 
-    // 1️⃣ Création du contact avec le champ personnalisé "company"
+    // 0️⃣ Vérifier si le contact existe déjà
+    const check = await fetch(`https://api.systeme.io/api/contacts?email=${encodeURIComponent(email)}`, {
+      headers: {
+        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
+      },
+    });
+
+    const existing = await check.json();
+
+    if (existing && existing.data && existing.data.length > 0) {
+      return res.status(200).json({
+        already: true,
+        message: "Vous êtes déjà inscrit.",
+      });
+    }
+
+    // 1️⃣ Création du contact
     const createContact = await fetch("https://api.systeme.io/api/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-API-Key": process.env.SYSTEME_IO_API_KEY,
       },
-      body: JSON.stringify({
-        email,
-        custom_fields: {
-          company: company, // "company" = clé unique du champ personnalisé
-        },
-      }),
+      body: JSON.stringify({ email }),
     });
 
     const created = await createContact.json();
 
     if (!createContact.ok) {
-      return res.status(500).json({ error: created });
+      return res.status(500).json({ error: created.message || "Erreur lors de la création du contact" });
     }
 
     const contactId = created.id;
@@ -41,7 +52,21 @@ export default async function handler(req, res) {
         "X-API-Key": process.env.SYSTEME_IO_API_KEY,
       },
       body: JSON.stringify({
-        tag_id: 1909605, // ID du tag "landing-artisan"
+        tag_id: 1909605,
+      }),
+    });
+
+    // 3️⃣ Mise à jour du champ personnalisé "company"
+    await fetch(`https://api.systeme.io/api/contacts/${contactId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
+      },
+      body: JSON.stringify({
+        custom_fields: {
+          company: company,
+        },
       }),
     });
 
