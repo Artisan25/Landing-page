@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // 1️⃣ Création du contact (SANS custom_fields)
+    // 1️⃣ Création du contact
     const createContact = await fetch("https://api.systeme.io/api/contacts", {
       method: "POST",
       headers: {
@@ -61,32 +61,20 @@ export default async function handler(req, res) {
       }),
     });
 
-    // 3️⃣ Mise à jour du champ personnalisé "company"
-    const update = await fetch(
-      `https://api.systeme.io/api/contacts/${contactId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-        },
-        body: JSON.stringify({
-          custom_fields: {
-            company: company,
-          },
-        }),
-      }
-    );
-
-    const updated = await update.json();
-
-    if (!update.ok) {
-      return res.status(500).json({
-        error: updated.message || "Erreur lors de la mise à jour du contact",
-      });
-    }
+    // 3️⃣ Ajout d’une note visible dans la fiche contact
+    await fetch(`https://api.systeme.io/api/contacts/${contactId}/notes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
+      },
+      body: JSON.stringify({
+        content: `Entreprise : ${company}`,
+      }),
+    });
 
     return res.status(200).json({ success: true });
+
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
