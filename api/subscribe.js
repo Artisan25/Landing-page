@@ -11,22 +11,25 @@ export default async function handler(req, res) {
     }
 
     // 0️⃣ Vérifier si le contact existe déjà
-    const check = await fetch(`https://api.systeme.io/api/contacts?email=${encodeURIComponent(email)}`, {
-      headers: {
-        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-      },
-    });
+    const check = await fetch(
+      `https://api.systeme.io/api/contacts?email=${encodeURIComponent(email)}`,
+      {
+        headers: {
+          "X-API-Key": process.env.SYSTEME_IO_API_KEY,
+        },
+      }
+    );
 
     const existing = await check.json();
 
-    if (existing && existing.data && existing.data.length > 0) {
+    if (existing?.data?.length > 0) {
       return res.status(200).json({
         already: true,
         message: "Vous êtes déjà inscrit.",
       });
     }
 
-    // 1️⃣ Création du contact
+    // 1️⃣ Création du contact (SANS custom_fields)
     const createContact = await fetch("https://api.systeme.io/api/contacts", {
       method: "POST",
       headers: {
@@ -39,7 +42,9 @@ export default async function handler(req, res) {
     const created = await createContact.json();
 
     if (!createContact.ok) {
-      return res.status(500).json({ error: created.message || "Erreur lors de la création du contact" });
+      return res.status(500).json({
+        error: created.message || "Erreur lors de la création du contact",
+      });
     }
 
     const contactId = created.id;
@@ -57,21 +62,31 @@ export default async function handler(req, res) {
     });
 
     // 3️⃣ Mise à jour du champ personnalisé "company"
-    await fetch(`https://api.systeme.io/api/contacts/${contactId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-      },
-      body: JSON.stringify({
-        custom_fields: {
-          company: company,
+    const update = await fetch(
+      `https://api.systeme.io/api/contacts/${contactId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": process.env.SYSTEME_IO_API_KEY,
         },
-      }),
-    });
+        body: JSON.stringify({
+          custom_fields: {
+            company: company,
+          },
+        }),
+      }
+    );
+
+    const updated = await update.json();
+
+    if (!update.ok) {
+      return res.status(500).json({
+        error: updated.message || "Erreur lors de la mise à jour du contact",
+      });
+    }
 
     return res.status(200).json({ success: true });
-
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
