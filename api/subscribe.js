@@ -10,25 +10,6 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Email manquant" });
     }
 
-    // 0️⃣ Vérifier si le contact existe déjà
-    const check = await fetch(
-      `https://api.systeme.io/api/contacts?email=${encodeURIComponent(email)}`,
-      {
-        headers: {
-          "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-        },
-      }
-    );
-
-    const existing = await check.json();
-
-    if (existing?.data?.length > 0) {
-      return res.status(200).json({
-        already: true,
-        message: "Vous êtes déjà inscrit.",
-      });
-    }
-
     // 1️⃣ Création du contact
     const createContact = await fetch("https://api.systeme.io/api/contacts", {
       method: "POST",
@@ -42,12 +23,10 @@ export default async function handler(req, res) {
     const created = await createContact.json();
 
     if (!createContact.ok) {
-      return res.status(500).json({
-        error: created.message || "Erreur lors de la création du contact",
-      });
+      return res.status(500).json({ error: created });
     }
 
-    const contactId = created.id;
+    const contactId = created.id; // ID du contact créé
 
     // 2️⃣ Ajout du tag
     await fetch(`https://api.systeme.io/api/contacts/${contactId}/tags`, {
@@ -57,19 +36,19 @@ export default async function handler(req, res) {
         "X-API-Key": process.env.SYSTEME_IO_API_KEY,
       },
       body: JSON.stringify({
-        tag_id: 1909605,
+        tag_id: 1909605, // ID du tag landing-artisan
       }),
     });
 
-    // 3️⃣ Ajout d’une note visible dans la fiche contact
-    await fetch(`https://api.systeme.io/api/contacts/${contactId}/notes`, {
+    // 3️⃣ Ajout de l’attribut "company"
+    await fetch(`https://api.systeme.io/api/contacts/${contactId}/attributes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-API-Key": process.env.SYSTEME_IO_API_KEY,
       },
       body: JSON.stringify({
-        content: `Entreprise : ${company}`,
+        company: company,
       }),
     });
 
