@@ -33,16 +33,18 @@ export default async function handler(req, res) {
 
     const contactId = created.id;
 
-    // 2️⃣ Ajout d’une note visible dans la fiche contact
+    // 2️⃣ Ajout d’une tâche visible dans la fiche contact
     if (company && company.trim() !== "") {
-      await fetch(`https://api.systeme.io/api/contacts/${contactId}/notes`, {
+      await fetch(`https://api.systeme.io/api/contacts/${contactId}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "X-API-Key": process.env.SYSTEME_IO_API_KEY,
         },
         body: JSON.stringify({
-          content: `Entreprise : ${company}`,
+          title: `Entreprise : ${company}`,
+          description: "",
+          status: "completed",
         }),
       });
     }
