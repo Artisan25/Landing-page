@@ -10,14 +10,19 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Email manquant" });
     }
 
-    // 1️⃣ Création du contact
+    // 1️⃣ Création du contact avec le champ personnalisé "company"
     const createContact = await fetch("https://api.systeme.io/api/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-API-Key": process.env.SYSTEME_IO_API_KEY,
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({
+        email,
+        custom_fields: {
+          company: company, // "company" = clé unique du champ personnalisé
+        },
+      }),
     });
 
     const created = await createContact.json();
@@ -26,7 +31,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: created });
     }
 
-    const contactId = created.id; // ID du contact créé
+    const contactId = created.id;
 
     // 2️⃣ Ajout du tag
     await fetch(`https://api.systeme.io/api/contacts/${contactId}/tags`, {
@@ -36,19 +41,7 @@ export default async function handler(req, res) {
         "X-API-Key": process.env.SYSTEME_IO_API_KEY,
       },
       body: JSON.stringify({
-        tag_id: 1909605, // ID du tag landing-artisan
-      }),
-    });
-
-    // 3️⃣ Ajout de l’attribut "company"
-    await fetch(`https://api.systeme.io/api/contacts/${contactId}/attributes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-      },
-      body: JSON.stringify({
-        company: company,
+        tag_id: 1909605, // ID du tag "landing-artisan"
       }),
     });
 
