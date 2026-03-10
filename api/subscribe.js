@@ -20,6 +20,9 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         email,
         tags: [1909605], // ton tag fonctionne déjà
+        attributes: {
+          company: company || ""
+        }
       }),
     });
 
@@ -28,24 +31,6 @@ export default async function handler(req, res) {
     if (!createContact.ok) {
       return res.status(500).json({
         error: created.message || "Erreur lors de la création du contact",
-      });
-    }
-
-    const contactId = created.id;
-
-    // 2️⃣ Ajout d’une tâche visible dans la fiche contact
-    if (company && company.trim() !== "") {
-      await fetch(`https://api.systeme.io/api/contacts/${contactId}/tasks`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-API-Key": process.env.SYSTEME_IO_API_KEY,
-        },
-        body: JSON.stringify({
-          title: `Entreprise : ${company}`,
-          description: "",
-          status: "completed",
-        }),
       });
     }
 
