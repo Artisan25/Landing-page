@@ -501,46 +501,39 @@ html { scroll-behavior: smooth; }
   <h2>Rejoindre la liste d’attente</h2>
   <p>Laissez votre email pour être informé du lancement.</p>
 
- 
+  <form method="post" action="https://systeme.io/embedded/38860806/subscription" id="newsletter-form">
+    
+    <!-- Email -->
+    <input 
+      type="email" 
+      name="email" 
+      placeholder="Votre email" 
+      required
+    />
 
-<!-- ***** Nouveau Formulaire **** -->
+    <!-- Nom de l'entreprise -->
+    <input 
+      type="text" 
+      name="company" 
+      placeholder="Nom de l'entreprise" 
+      required
+    />
 
-<form id="newsletter-form">
-  <input type="email" id="email" placeholder="Votre email" required />
-  <input type="text" id="company" placeholder="company" required />
-  <button type="submit" id="submit-btn">S'inscrire</button>
-</form>
+    <!-- Redirection après inscription -->
+    <input 
+      type="hidden" 
+      name="redirect_url" 
+      value="https://ton-domaine.fr/merci.html"
+    />
 
-<p id="message"></p>
+    <button type="submit" id="submit-btn">
+      S'inscrire
+    </button>
+  </form>
 
-
-<script>
-// Fonction pour rediriger vers Systeme.io
-function redirectToSystemeIO(email, company) {
-  const targetUrl = `https://c63a-contact.systeme.io/58852b98?email=${encodeURIComponent(email)}&company=${encodeURIComponent(company)}`;
- console.log("URL envoyée :", targetUrl);
-
-  window.location.href = targetUrl;
-}
-
-document.getElementById("newsletter-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value;
-  const company = document.getElementById("company").value;
-  const message = document.getElementById("message");
-  const button = document.getElementById("submit-btn");
-
-  // Désactive le bouton
-  button.disabled = true;
-  message.textContent = "Redirection en cours...";
-
-  // Redirection vers Systeme.io
-  redirectToSystemeIO(email, company);
-});
-</script>
-
+  <p id="message"></p>
 </section>
+
 
   
 
