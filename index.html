@@ -493,110 +493,49 @@ html { scroll-behavior: smooth; }
 </section>
 
 
+
+  
 <!-- Formulaire d'inscription -->
 
 <section id="inscription">
   <h2>Rejoindre la liste d’attente</h2>
   <p>Laissez votre email pour être informé du lancement.</p>
 
-  <!-- Formulaire d'inscription avec redirection vers page remerciement -->
-  
- <!-- <form id="waitlist-form">
-
-  <div class="form-group">
-    <label for="email">Votre email</label>
-    <input type="email" id="email" name="email" placeholder="exemple@mail.com" required>
-  </div>
-
-  <div class="form-group">
-    <label for="metier">Votre métier (optionnel)</label>
-    <input type="text" id="metier" name="metier" placeholder="Plombier, Électricien, Peintre…">
-  </div>
-
-  <p><button type="submit" class="cta-primary">S'inscrire</button></p>
-  </form>
-
-<!-- Script de redirection -->
-
-<!-- <script>
-document.getElementById("waitlist-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const email = document.querySelector("input[type='email']").value;
-  const metier = document.querySelector("input[type='text']").value;
-
-  // Envoi vers Google Sheets
-  fetch("https://script.google.com/macros/s/AKfycby5tVJKVBTBDBfCl1ovZemedik-SHjvkQWdPJguNpaB62QEeIbfZZiqkPtCqZnYpp5V8A/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: email, metier: metier })
-  }).catch(function(error) {
-    console.error("Erreur lors de l'envoi vers Google Sheets :", error);
-  });
-
-  // Redirection immédiate
-  window.location.href = "merci.html";
-<!-- }); -->
-<!-- <! --</script> -->
+ 
 
 <!-- ***** Nouveau Formulaire **** -->
 
 <form id="newsletter-form">
-  <input 
-    type="email" 
-    id="email" 
-    placeholder="Votre email" 
-    required 
-  />
-
-  <input 
-    type="text" 
-    id="company" 
-    placeholder="Nom de l'entreprise" 
-    required 
-  />
-
+  <input type="email" id="email" placeholder="Votre email" required />
+  <input type="text" id="company" placeholder="Nom de l'entreprise" required />
   <button type="submit" id="submit-btn">S'inscrire</button>
 </form>
 
 <p id="message"></p>
 
+
 <script>
-  document.getElementById("newsletter-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
+// Fonction pour rediriger vers Systeme.io
+function redirectToSystemeIO(email, company) {
+  const targetUrl = `https://c63a-contact.systeme.io/58852b98?email=${encodeURIComponent(email)}&company=${encodeURIComponent(company)}`;
+  window.location.href = targetUrl;
+}
 
-    const email = document.getElementById("email").value;
-    const company = document.getElementById("company").value;
-    const message = document.getElementById("message");
-    const button = document.getElementById("submit-btn");
+document.getElementById("newsletter-form").addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    // Désactive le bouton pour éviter les doubles clics
-    button.disabled = true;
-    message.textContent = "Envoi en cours...";
+  const email = document.getElementById("email").value;
+  const company = document.getElementById("company").value;
+  const message = document.getElementById("message");
+  const button = document.getElementById("submit-btn");
 
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, company }),
-      });
+  // Désactive le bouton
+  button.disabled = true;
+  message.textContent = "Redirection en cours...";
 
-      const data = await res.json();
-
-      if (data.success) {
-        message.textContent = "Merci ! Redirection...";
-        window.location.href = "merci.html";
-      } else {
-        message.textContent = "Erreur : " + data.error;
-      }
-
-    } catch (err) {
-      message.textContent = "Erreur réseau. Réessayez dans un instant.";
-    }
-
-    // Réactive le bouton
-    button.disabled = false;
-  });
+  // Redirection vers Systeme.io
+  redirectToSystemeIO(email, company);
+});
 </script>
 
 
@@ -604,22 +543,8 @@ document.getElementById("waitlist-form").addEventListener("submit", function(eve
 
 
 
-<!-- Ancien Script -->
 
-<!-- <script> -->
-<!-- document.getElementById("waitlist-form").addEventListener("submit", function(e) { -->
-<!--  e.preventDefault(); -->
-<!--  const form = e.target; -->
 
-<!--  fetch(form.action, { -->
-<!--    method: "POST", -->
-<!--    body: new FormData(form), -->
-<!--    headers: { "Accept": "application/json" } -->
-<!--  }).then(() => { -->
-<!--    window.location.href = "merci.html"; -->
-<!--  }); -->
-<!-- }); -->
-<!-- </script> -->
 
 
 </section>
