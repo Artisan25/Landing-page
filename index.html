@@ -518,6 +518,8 @@ html { scroll-behavior: smooth; }
 // Fonction pour rediriger vers Systeme.io
 function redirectToSystemeIO(email, company) {
   const targetUrl = `https://c63a-contact.systeme.io/58852b98?email=${encodeURIComponent(email)}&company=${encodeURIComponent(company)}`;
+ console.log("URL envoyée :", targetUrl);
+
   window.location.href = targetUrl;
 }
 
